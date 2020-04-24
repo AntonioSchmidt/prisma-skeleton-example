@@ -8,6 +8,7 @@
     "clean": "rm -rf dist",
     "build": "yarn clean && prisma generate && ts-node --transpile-only src/schema && tsc",
     "generate": "node_modules/.bin/prisma generate",
+    "migrate:up": "node_modules/.bin/prisma migrate up --experimental ",
     "postinstall": "yarn generate",
     "start:dev": "node_modules/.bin/prisma generate --watch & ts-node-dev --respawn --transpile-only src/schema & tsc-watch --onSuccess \"node dist\""
   },
