@@ -1,0 +1,32 @@
+{
+  "name": "PrismaTodo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn build && node dist",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && prisma generate && ts-node --transpile-only src/schema && tsc",
+    "generate": "node_modules/.bin/prisma generate",
+    "postinstall": "yarn generate",
+    "start:dev": "node_modules/.bin/prisma generate --watch & ts-node-dev --respawn --transpile-only src/schema & tsc-watch --onSuccess \"node dist\""
+  },
+  "dependencies": {
+    "@nexus/schema": "^0.13.1",
+    "@prisma/client": "^2.0.0-beta.3",
+    "apollo-server": "^2.12.0",
+    "expo-cli": "^3.18.2",
+    "global": "^4.4.0",
+    "graphql": "^15.0.0",
+    "nexus-prisma": "^0.12.0",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.0.0-beta.3",
+    "@types/node": "^13.11.1",
+    "ts-node": "^8.8.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tsc-watch": "^4.2.3",
+    "typescript": "^3.8.3"
+  }
+}
