@@ -4,7 +4,7 @@ import {objectType, stringArg, subscriptionField} from '@nexus/schema'
     name: 'Comment',
     definition(t): void {
         t.model.id()
-        t.model.email()
+        t.model.nickname()
         t.model.text()
         t.model.streamId()
     }
@@ -17,14 +17,14 @@ export const Mutation = objectType({
         t.field('addComment', {
             type: 'Comment',
             args: {
-                email: stringArg({ nullable: false }),
+                nickname: stringArg({ nullable: false }),
                 text: stringArg({ nullable: false }),
                 streamId: stringArg({ nullable: false }),
             },
-            resolve: async (_, { email, text, streamId }, ctx) => {
+            resolve: async (_, { nickname, text, streamId }, ctx) => {
                 const comment = await ctx.prisma.comment.create({
                     data: {
-                        email,
+                        nickname,
                         text,
                         streamId,
                     },

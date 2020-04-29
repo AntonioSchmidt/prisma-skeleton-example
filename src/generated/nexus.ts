@@ -46,8 +46,8 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Comment: { // field return type
-    email: string; // String!
     id: number; // Int!
+    nickname: string; // String!
     streamId: string; // String!
     text: string; // String!
   }
@@ -65,7 +65,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenArgTypes {
   Mutation: {
     addComment: { // args
-      email: string; // String!
+      nickname: string; // String!
       streamId: string; // String!
       text: string; // String!
     }

@@ -3,8 +3,8 @@
 
 
 type Comment {
-  email: String!
   id: Int!
+  nickname: String!
   streamId: String!
   text: String!
 }
@@ -14,7 +14,7 @@ input CommentWhereUniqueInput {
 }
 
 type Mutation {
-  addComment(email: String!, streamId: String!, text: String!): Comment!
+  addComment(nickname: String!, streamId: String!, text: String!): Comment!
 }
 
 type Query {
