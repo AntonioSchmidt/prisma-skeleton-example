@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "12.x.x"
+  },
   "scripts": {
+    "start:heroku": "node dist",
     "start": "yarn build && node dist",
     "clean": "rm -rf dist",
     "build": "yarn clean && yarn generate generate && ts-node --transpile-only src/schema && tsc",

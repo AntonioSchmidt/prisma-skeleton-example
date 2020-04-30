@@ -2,10 +2,41 @@
 ### Do not make changes to this file directly
 
 
+type Channel {
+  createdAt: DateTime!
+  id: Int!
+  transmitting: Boolean!
+  url: String!
+}
+
+input ChannelCreateInput {
+  comments: CommentCreateManyWithoutChannelInput
+  createdAt: DateTime
+  transmitting: Boolean
+  url: String!
+}
+
+input ChannelWhereUniqueInput {
+  id: Int
+}
+
 type Comment {
+  channelId: Int!
+  createdAt: DateTime!
   id: Int!
   nickname: String!
-  streamId: String!
+  text: String!
+}
+
+input CommentCreateManyWithoutChannelInput {
+  connect: [CommentWhereUniqueInput!]
+  create: [CommentCreateWithoutChannelInput!]
+}
+
+input CommentCreateWithoutChannelInput {
+  archived: Boolean
+  createdAt: DateTime
+  nickname: String!
   text: String!
 }
 
@@ -13,11 +44,17 @@ input CommentWhereUniqueInput {
   id: Int
 }
 
+scalar DateTime
+
 type Mutation {
-  addComment(nickname: String!, streamId: String!, text: String!): Comment!
+  addComment(channelId: Int!, nickname: String!, text: String!): Comment!
+  createOneChannel(data: ChannelCreateInput!): Channel!
 }
 
 type Query {
+  channel(where: ChannelWhereUniqueInput!): Channel
+  channels(after: ChannelWhereUniqueInput, before: ChannelWhereUniqueInput, first: Int, last: Int, skip: Int): [Channel!]!
+  comment(where: CommentWhereUniqueInput!): Comment
   comments(after: CommentWhereUniqueInput, before: CommentWhereUniqueInput, first: Int, last: Int, skip: Int): [Comment!]!
 }
 

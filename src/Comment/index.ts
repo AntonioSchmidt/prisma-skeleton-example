@@ -1,4 +1,4 @@
-import {objectType, stringArg, subscriptionField} from '@nexus/schema'
+import {objectType, stringArg, intArg, subscriptionField} from '@nexus/schema'
 
  export const Comment = objectType({
     name: 'Comment',
@@ -6,7 +6,8 @@ import {objectType, stringArg, subscriptionField} from '@nexus/schema'
         t.model.id()
         t.model.nickname()
         t.model.text()
-        t.model.streamId()
+        t.model.createdAt()
+        t.model.channelId()
     }
 })
 
@@ -19,17 +20,21 @@ export const Mutation = objectType({
             args: {
                 nickname: stringArg({ nullable: false }),
                 text: stringArg({ nullable: false }),
-                streamId: stringArg({ nullable: false }),
+                channelId: intArg({ nullable: false }),
             },
-            resolve: async (_, { nickname, text, streamId }, ctx) => {
+            resolve: async (_, { nickname, text, channelId }, ctx) => {
                 const comment = await ctx.prisma.comment.create({
                     data: {
                         nickname,
                         text,
-                        streamId,
+                        channel: {
+                            connect: {
+                                id: channelId
+                            }
+                        }
                     },
                 })
-                ctx.pubsub.publish(`comments-${streamId}`, comment)
+                ctx.pubsub.publish(`comments-${channelId}`, comment)
                 return comment;
             }
         })
@@ -40,6 +45,8 @@ export const Query = objectType({
     name: 'Query',
     definition(t): void {
         t.crud.comments()
+        t.crud.comment()
+
     }
 })
 
