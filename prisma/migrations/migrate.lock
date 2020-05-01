@@ -3,7 +3,4 @@
 # Prisma Migrate lockfile v1
 # Read more about conflict resolution here: TODO
 
-20200424122944-live
-20200427165926-add_archived_created-at-comments_table
-20200429115449-add-nickname-comment
-20200429174237-create_channel
+20200430140828-create_table_init

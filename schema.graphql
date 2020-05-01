@@ -10,9 +10,7 @@ type Channel {
 }
 
 input ChannelCreateInput {
-  comments: CommentCreateManyWithoutChannelInput
-  createdAt: DateTime
-  transmitting: Boolean
+  transmitting: Boolean = true
   url: String!
 }
 
@@ -24,18 +22,6 @@ type Comment {
   channelId: Int!
   createdAt: DateTime!
   id: Int!
-  nickname: String!
-  text: String!
-}
-
-input CommentCreateManyWithoutChannelInput {
-  connect: [CommentWhereUniqueInput!]
-  create: [CommentCreateWithoutChannelInput!]
-}
-
-input CommentCreateWithoutChannelInput {
-  archived: Boolean
-  createdAt: DateTime
   nickname: String!
   text: String!
 }

@@ -1,6 +1,6 @@
 import {objectType, stringArg, intArg, subscriptionField} from '@nexus/schema'
 
- export const Comment = objectType({
+const Comment = objectType({
     name: 'Comment',
     definition(t): void {
         t.model.id()
@@ -11,7 +11,7 @@ import {objectType, stringArg, intArg, subscriptionField} from '@nexus/schema'
     }
 })
 
-export const Mutation = objectType({
+const Mutation = objectType({
     name: 'Mutation',
     definition(t): void {
 
@@ -41,16 +41,18 @@ export const Mutation = objectType({
     }
 })
 
-export const Query = objectType({
+const Query = objectType({
     name: 'Query',
     definition(t): void {
-        t.crud.comments()
+        t.crud.comments({
+
+        })
         t.crud.comment()
 
     }
 })
 
-export const CommentSubscription = subscriptionField('subscribeComments', {
+const CommentSubscription = subscriptionField('subscribeComments', {
     type: 'Comment',
     args: {
       streamId: stringArg({ nullable: false })
@@ -62,4 +64,10 @@ export const CommentSubscription = subscriptionField('subscribeComments', {
         return payload
     }
 })
+export const Schemas = [
+    CommentSubscription,
+    Query,
+    Mutation,
+    Comment
+]
 

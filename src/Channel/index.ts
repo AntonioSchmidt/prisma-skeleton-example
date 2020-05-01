@@ -1,6 +1,6 @@
-import {objectType, stringArg, extendType} from '@nexus/schema'
+import {objectType, inputObjectType, extendType} from '@nexus/schema'
 
-export const Channel = objectType({
+const Channel = objectType({
     name: 'Channel',
     definition(t): void {
         t.model.id()
@@ -10,17 +10,32 @@ export const Channel = objectType({
     }
 })
 
-export const Mutation = extendType({
+const Mutation = extendType({
     type: 'Mutation',
     definition(t): void {
         t.crud.createOneChannel()
     }
 })
 
-export const Query = extendType({
+const Query = extendType({
     type: 'Query',
     definition(t): void {
         t.crud.channels()
         t.crud.channel()
     }
 })
+
+const ChannelCreateInput = inputObjectType({
+    name: 'ChannelCreateInput',
+    definition(t): void {
+        t.string('url', { nullable: false })
+        t.boolean('transmitting', { default: true })
+    }
+})
+
+export const Schemas = [
+    ChannelCreateInput,
+    Mutation,
+    Channel,
+    Query
+]
