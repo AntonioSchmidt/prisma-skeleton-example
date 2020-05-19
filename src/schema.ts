@@ -1,11 +1,8 @@
 import { makeSchema } from "@nexus/schema";
-import { nexusPrismaPlugin } from "nexus-prisma";
-import { Schemas as CommentSchemas } from "./Comment";
-import { Schemas } from "./Channel";
+import { Schemas } from "./Event";
 
 export const schema = makeSchema({
-    types: [...CommentSchemas, ...Schemas ],
-    plugins: [nexusPrismaPlugin({ shouldGenerateArtifacts: true })],
+    types: [...Schemas ],
     shouldGenerateArtifacts: true,
     outputs: {
         schema: __dirname + '/../schema.graphql',

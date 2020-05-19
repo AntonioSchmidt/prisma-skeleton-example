@@ -2,48 +2,11 @@
 ### Do not make changes to this file directly
 
 
-type Channel {
-  createdAt: DateTime!
-  id: Int!
-  transmitting: Boolean!
-  url: String!
-}
-
-input ChannelCreateInput {
-  transmitting: Boolean = true
-  url: String!
-}
-
-input ChannelWhereUniqueInput {
-  id: Int
-}
-
-type Comment {
-  channelId: Int!
-  createdAt: DateTime!
-  id: Int!
-  nickname: String!
-  text: String!
-}
-
-input CommentWhereUniqueInput {
-  id: Int
-}
-
-scalar DateTime
-
 type Mutation {
-  addComment(channelId: Int!, nickname: String!, text: String!): Comment!
-  createOneChannel(data: ChannelCreateInput!): Channel!
+  addViewersCount(eventUUID: String!): Int!
+  removeViewersCount(eventUUID: String!): Int!
 }
 
 type Query {
-  channel(where: ChannelWhereUniqueInput!): Channel
-  channels(after: ChannelWhereUniqueInput, before: ChannelWhereUniqueInput, first: Int, last: Int, skip: Int): [Channel!]!
-  comment(where: CommentWhereUniqueInput!): Comment
-  comments(after: CommentWhereUniqueInput, before: CommentWhereUniqueInput, first: Int, last: Int, skip: Int): [Comment!]!
-}
-
-type Subscription {
-  subscribeComments(streamId: String!): Comment!
+  getViewersCount(eventUUID: String!): Int!
 }

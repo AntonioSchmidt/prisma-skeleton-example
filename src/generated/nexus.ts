@@ -4,122 +4,56 @@
  */
 
 import * as Context from "../context"
-import * as prisma from "@prisma/client"
 
 
 
-declare global {
-  interface NexusGenCustomOutputProperties<TypeName extends string> {
-    crud: NexusPrisma<TypeName, 'crud'>
-    model: NexusPrisma<TypeName, 'model'>
-  }
-}
+
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
-  ChannelCreateInput: { // input type
-    transmitting?: boolean | null; // Boolean
-    url: string; // String!
-  }
-  ChannelWhereUniqueInput: { // input type
-    id?: number | null; // Int
-  }
-  CommentWhereUniqueInput: { // input type
-    id?: number | null; // Int
-  }
 }
 
 export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
-  Channel: prisma.Channel;
-  Comment: prisma.Comment;
   Mutation: {};
   Query: {};
-  Subscription: {};
   String: string;
   Int: number;
   Float: number;
   Boolean: boolean;
   ID: string;
-  DateTime: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  ChannelCreateInput: NexusGenInputs['ChannelCreateInput'];
-  ChannelWhereUniqueInput: NexusGenInputs['ChannelWhereUniqueInput'];
-  CommentWhereUniqueInput: NexusGenInputs['CommentWhereUniqueInput'];
 }
 
 export interface NexusGenFieldTypes {
-  Channel: { // field return type
-    createdAt: any; // DateTime!
-    id: number; // Int!
-    transmitting: boolean; // Boolean!
-    url: string; // String!
-  }
-  Comment: { // field return type
-    channelId: number; // Int!
-    createdAt: any; // DateTime!
-    id: number; // Int!
-    nickname: string; // String!
-    text: string; // String!
-  }
   Mutation: { // field return type
-    addComment: NexusGenRootTypes['Comment']; // Comment!
-    createOneChannel: NexusGenRootTypes['Channel']; // Channel!
+    addViewersCount: number; // Int!
+    removeViewersCount: number; // Int!
   }
   Query: { // field return type
-    channel: NexusGenRootTypes['Channel'] | null; // Channel
-    channels: NexusGenRootTypes['Channel'][]; // [Channel!]!
-    comment: NexusGenRootTypes['Comment'] | null; // Comment
-    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
-  }
-  Subscription: { // field return type
-    subscribeComments: NexusGenRootTypes['Comment']; // Comment!
+    getViewersCount: number; // Int!
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    addComment: { // args
-      channelId: number; // Int!
-      nickname: string; // String!
-      text: string; // String!
+    addViewersCount: { // args
+      eventUUID: string; // String!
     }
-    createOneChannel: { // args
-      data: NexusGenInputs['ChannelCreateInput']; // ChannelCreateInput!
+    removeViewersCount: { // args
+      eventUUID: string; // String!
     }
   }
   Query: {
-    channel: { // args
-      where: NexusGenInputs['ChannelWhereUniqueInput']; // ChannelWhereUniqueInput!
-    }
-    channels: { // args
-      after?: NexusGenInputs['ChannelWhereUniqueInput'] | null; // ChannelWhereUniqueInput
-      before?: NexusGenInputs['ChannelWhereUniqueInput'] | null; // ChannelWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-      skip?: number | null; // Int
-    }
-    comment: { // args
-      where: NexusGenInputs['CommentWhereUniqueInput']; // CommentWhereUniqueInput!
-    }
-    comments: { // args
-      after?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
-      before?: NexusGenInputs['CommentWhereUniqueInput'] | null; // CommentWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-      skip?: number | null; // Int
-    }
-  }
-  Subscription: {
-    subscribeComments: { // args
-      streamId: string; // String!
+    getViewersCount: { // args
+      eventUUID: string; // String!
     }
   }
 }
@@ -129,15 +63,15 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Channel" | "Comment" | "Mutation" | "Query" | "Subscription";
+export type NexusGenObjectNames = "Mutation" | "Query";
 
-export type NexusGenInputNames = "ChannelCreateInput" | "ChannelWhereUniqueInput" | "CommentWhereUniqueInput";
+export type NexusGenInputNames = never;
 
 export type NexusGenEnumNames = never;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 
