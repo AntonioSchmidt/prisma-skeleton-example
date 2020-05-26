@@ -2,9 +2,19 @@
 ### Do not make changes to this file directly
 
 
+type EventHardcoded {
+  description: String!
+  id: Int!
+  name: String!
+  startTime: Int!
+  url: String!
+}
+
 type Mutation {
-  addViewersCount(eventUUID: String!): Int!
-  removeViewersCount(eventUUID: String!): Int!
+  decrementViewersCount(eventUUID: String!): Int!
+  incrementViewersCount(eventUUID: String!): Int!
+  joinEvent(hash: String!, userToken: String!): EventHardcoded
+  resetViewersCount(eventUUID: String!): Int
 }
 
 type Query {

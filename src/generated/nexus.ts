@@ -20,6 +20,13 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  EventHardcoded: { // root type
+    description: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    startTime: number; // Int!
+    url: string; // String!
+  }
   Mutation: {};
   Query: {};
   String: string;
@@ -33,9 +40,18 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  EventHardcoded: { // field return type
+    description: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    startTime: number; // Int!
+    url: string; // String!
+  }
   Mutation: { // field return type
-    addViewersCount: number; // Int!
-    removeViewersCount: number; // Int!
+    decrementViewersCount: number; // Int!
+    incrementViewersCount: number; // Int!
+    joinEvent: NexusGenRootTypes['EventHardcoded'] | null; // EventHardcoded
+    resetViewersCount: number | null; // Int
   }
   Query: { // field return type
     getViewersCount: number; // Int!
@@ -44,10 +60,17 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    addViewersCount: { // args
+    decrementViewersCount: { // args
       eventUUID: string; // String!
     }
-    removeViewersCount: { // args
+    incrementViewersCount: { // args
+      eventUUID: string; // String!
+    }
+    joinEvent: { // args
+      hash: string; // String!
+      userToken: string; // String!
+    }
+    resetViewersCount: { // args
       eventUUID: string; // String!
     }
   }
@@ -63,7 +86,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query";
+export type NexusGenObjectNames = "EventHardcoded" | "Mutation" | "Query";
 
 export type NexusGenInputNames = never;
 

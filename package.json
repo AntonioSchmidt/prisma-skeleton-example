@@ -28,6 +28,7 @@
     "nexus-prisma": "^0.12.0",
     "redis": "^3.0.2",
     "sqlite3": "^4.1.1",
+    "uuidv4": "^6.0.9",
     "ws": "^7.2.5"
   },
   "devDependencies": {
